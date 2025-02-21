@@ -1,4 +1,4 @@
-﻿# Chatbot UI 
+# Mental Health Chatbot Frontend
 
 In this repository we create the frontend application using Streamlit with CSS for styles and JavaScript for enabling the theme toggle button and interacted with the backend appliacation using requests library.
 
