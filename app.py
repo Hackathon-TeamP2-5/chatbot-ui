@@ -1,85 +1,80 @@
 import streamlit as st
+import requests
 from auth import login, signup
 from chat import setup_sidebar, display_chat
-from utils import initialize_session_state, get_ai_response
+from utils import initialize_session_state
 
-def load_css():
-    with open("styles.css") as f:
+def load_css(theme):
+    """
+    Dynamically load CSS based on the selected theme and hide Streamlit's header/footer.
+    """
+    css_file = f"{theme}.css"
+    with open(css_file) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
+    # Hide Streamlit's built-in header, footer, and toolbar
+    st.markdown(
+        """
+        <style>
+            /* Hide Streamlit header, footer, and toolbar */
+            header {visibility: hidden;}
+            .css-18e3th9 {display: none !important;} /* Hides Streamlit toolbar */
+            footer {visibility: hidden;}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+def toggle_theme():
+    """
+    Toggle between light and dark themes and trigger a page rerun.
+    """
+    st.session_state.theme = "dark" if st.session_state.theme == "light" else "light"
+    st.rerun()
+
 def main():
-    st.set_page_config(page_title="Companion - Psychological Support", layout="wide")
-    load_css()  
+    st.set_page_config(page_title="Rafeeq - Psychological Support", layout="wide")
+
+    if "theme" not in st.session_state:
+        st.session_state.theme = "light"  # Default theme
+
+    load_css(st.session_state.theme)
     initialize_session_state()
 
-    query_params = st.query_params
-    current_page = query_params.get("page", "auth")
+    # Header with title and a single toggle button
+    col1, col2 = st.columns([5, 1])
+    with col1:
+        st.markdown("<span style='font-size:26px;font-weight:bold;'>🧠 Rafeeq - Mental Health Chatbot</span>", unsafe_allow_html=True)
+    
+    with col2:
+        if st.button("Toggle Theme", key="theme_toggle"):
+            toggle_theme()
 
-    if current_page == "auth":
-        if st.session_state.logged_in:
-            st.query_params["page"] = "app"
-            st.rerun()
-        else:
-            st.title("🔐 Login / Create a New Account")
-            menu = ["login", "Create a New Account"]
-            choice = st.radio("Select Action: ", menu, horizontal=True)
-
-            with st.container():
-                col1, col2, col3 = st.columns([1, 1, 1]) 
-                with col2:
-                    if choice == "login":
-                        st.markdown("### login")
-                        email = st.text_input("📧 Email", key="login_email")
-                        password = st.text_input("🔑 Password", type="password", key="login_password")
-                        if st.button("🔓 login", key="login_button"):
-                            login(email, password)
-
-                    elif choice == "Create":
-                        st.markdown("### Create a New Account")
-                        email = st.text_input("📧 Email", key="signup_email")
-                        password = st.text_input("🔑 Password", type="password", key="signup_password")
-                        confirm_password = st.text_input("🔑 Confirm Password", type="password", key="signup_confirm_password")
-                        if st.button("📝 Create a New Account", key="signup_button"):
-                            signup(email, password, confirm_password)
-
-    elif st.session_state.logged_in:
-        st.title("Welcome to Rafeeq – Psychological Support")
+    # Show chat if logged in
+    if st.session_state.get("logged_in", False):
         setup_sidebar()
         display_chat()
-
-        user_input = st.text_input("Type your message here...", key="user_input")
-        if st.button("Send", key="send_button"):
-            if st.session_state.selected_chat is None:
-                st.warning("⚠ Please select a chat session or create a new one.")
-            else:
-                st.session_state.chat_history[st.session_state.selected_chat]["messages"].append(
-                    {"role": "user", "content": user_input}
-                )
-                ai_response = get_ai_response(user_input)
-                st.session_state.chat_history[st.session_state.selected_chat]["messages"].append(
-                    {"role": "assistant", "content": ai_response}
-                )
-                st.rerun()
-
     else:
-        st.query_params["page"] = "auth"
-        st.rerun()
+        st.title("🔐 Login / Create a New Account")
+        menu = ["Login", "Create a New Account"]
+        choice = st.radio("Select Action: ", menu, horizontal=True)
 
-def display_video_page():
-    st.set_page_config(page_title="📺 Display Video", layout="wide")
-    
-    st.title("📺 Watch Psychotherapy Videos")
-
-    st.write("Explore informative psychotherapy videos curated for mental health support.")
-
-    st.video("https://www.youtube.com/watch?v=fRWhmVie0GU")  # Example video
-
-    st.markdown("---")
-
-    if st.button("🔙 Back to Home"):
-        st.session_state.page = "app"
-        st.query_params["page"] = "app"
-        st.rerun()
+        with st.container():
+            col1, col2, col3 = st.columns([1, 1, 1])
+            with col2:
+                st.markdown('<div class="stForm">', unsafe_allow_html=True)
+                if choice == "Login":
+                    email = st.text_input("📧 Email", key="login_email")
+                    password = st.text_input("🔑 Password", type="password", key="login_password")
+                    if st.button("🔓 Login", key="login_button"):
+                        login(email, password)
+                else:
+                    email = st.text_input("📧 Email", key="signup_email")
+                    password = st.text_input("🔑 Password", type="password", key="signup_password")
+                    confirm_password = st.text_input("🔑 Confirm Password", type="password", key="signup_confirm_password")
+                    if st.button("📝 Sign Up", key="signup_button"):
+                        signup(email, password, confirm_password)
+                st.markdown('</div>', unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()

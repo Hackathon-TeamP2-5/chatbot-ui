@@ -12,6 +12,14 @@ quotes = [
 def get_random_quote():
     return random.choice(quotes)
 
-def workout_website():
-    url = "https://suar.me/6Adx" 
-    st.markdown(f'<meta http-equiv="refresh" content="0;>')
+# Set page title
+st.set_page_config(page_title="💬 Motivational Quotes", layout="wide")
+
+st.title("💬 Motivational Quotes")
+
+# Display a random quote
+st.markdown(f"### ✨ {get_random_quote()}")
+
+# Button to get a new quote
+if st.button("🔄 Get Another Quote"):
+    st.rerun()

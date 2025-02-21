@@ -1,124 +1,114 @@
 body {
-    font-family: 'Tahoma', 'Arial', sans-serif; 
-    background-color: #e8f5e9;
-    color: #2c3e50;
-    direction: rtl; 
-    text-align: right; 
+  font-family: "Tahoma", "Arial", sans-serif;
+  background-color: #e8f5e9;
+  color: #2c3e50;
+  direction: rtl;
+  text-align: right;
 }
 
 .stApp {
-    background-color: #ffffff;
+  background-color: #ffffff;
 }
-
 
 .header {
-    font-size: 24px;
-    font-weight: bold;
-    color: #388e3c; 
-    margin-bottom: 20px;
+  font-size: 30px;
+  font-weight: bold;
+  color: #388e3c;
+  margin-bottom: 20px;
 }
-
 
 .sidebar .sidebar-content {
-    background-color: #ffffff; 
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    direction: rtl; 
-    text-align: right; 
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  direction: rtl;
+  text-align: right;
 }
 
-
 .stButton button {
-    background-color: #388e3c; 
-    color: white;
-    border-radius: 8px;
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    transition: background-color 0.3s ease;
+  background-color: #388e3c;
+  color: white;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  transition: background-color 0.3s ease;
 }
 
 .stButton button:hover {
-    background-color: #2e7d32; 
+  background-color: #2e7d32;
 }
 
-
 .user-message {
-    background-color: #ecf0f1;
-    padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    direction: rtl; 
-    text-align: right; 
+  background-color: #ecf0f1;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  direction: rtl;
+  text-align: right;
 }
 
 .assistant-message {
-    background-color: #388e3c; 
-    color: white;
-    padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    direction: rtl; 
-    text-align: right; 
+  background-color: #388e3c;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  direction: rtl;
+  text-align: right;
 }
-
 
 .stTextInput input {
-    border-radius: 8px;
-    border: 1px solid #bdc3c7;
-    padding: 10px;
-    direction: rtl; 
-    text-align: right; 
-    width: 100%; 
+  border-radius: 8px;
+  border: 1px solid #bdc3c7;
+  padding: 10px;
+  direction: rtl;
+  text-align: right;
+  width: 100%;
 }
-
 
 .stContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
-
 
 .stForm {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
 }
-
 
 .stForm h3 {
-    text-align: center;
-    color: #388e3c;
-    margin-bottom: 20px;
+  text-align: center;
+  color: #388e3c;
+  margin-bottom: 20px;
 }
-
 
 .stForm label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
 }
 
-
 .stForm button {
-    width: 100%;
-    margin-top: 10px;
-    background-color: #388e3c; 
-    color: white;
-    border-radius: 8px;
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    transition: background-color 0.3s ease;
+  width: 100%;
+  margin-top: 10px;
+  background-color: #388e3c;
+  color: white;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  transition: background-color 0.3s ease;
 }
 
 .stForm button:hover {
-    background-color: #2e7d32;
+  background-color: #2e7d32;
 }
